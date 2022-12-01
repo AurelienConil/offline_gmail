@@ -1,0 +1,12 @@
+[
+    {
+        "author": "monami@gmail.com",
+        "msg": "blabla",
+        "time": "10pm",
+        "preview": "super nouvelle à annoncer",
+        "selected": false,
+        "read": false,
+        "starred": false,
+        "important" : false
+    }
+]

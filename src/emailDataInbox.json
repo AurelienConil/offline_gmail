@@ -1,0 +1,122 @@
+[
+    {
+        "author": "moi",
+        "msg": "blabla",
+        "time": "10pm",
+        "preview": "nouvel abo",
+        "selected": false,
+        "read": false,
+        "starred": false,
+        "important" : false
+    },
+    {
+        "author": "lui",
+        "msg": "cuicui",
+        "time": "5pm",
+        "preview": "nouveau msg",
+        "selected": false,
+        "read": true,
+        "starred": false,
+        "important" : false
+    },
+    {
+        "author": "Giselle",
+        "msg": "cuicui",
+        "time": "5pm",
+        "preview": "nouveau msg",
+        "selected": false,
+        "read": false,
+        "starred": true,
+        "important" : false
+    },
+    {
+        "author": "Marg",
+        "msg": "ci",
+        "time": "5pm",
+        "preview": "nouve",
+        "selected": true,
+        "read": false,
+        "starred": false,
+        "important" : false
+    },
+    {
+        "author": "Erne",
+        "msg": "cuicui",
+        "time": "5pm",
+        "preview": "nouveau msg",
+        "selected": false,
+        "read": false,
+        "starred": true,
+        "important" : true
+    },
+    {
+        "author": "Luc",
+        "msg": "cuicui",
+        "time": "5pm",
+        "preview": "nouveau msg",
+        "selected": false,
+        "read": false,
+        "starred": false,
+        "important" : false
+    },
+    {
+        "author": "moi",
+        "msg": "blabla",
+        "time": "10pm",
+        "preview": "nouvel abo",
+        "selected": false,
+        "read": false,
+        "starred": false,
+        "important" : false
+    },
+    {
+        "author": "lui",
+        "msg": "cuicui",
+        "time": "5pm",
+        "preview": "nouveau msg",
+        "selected": false,
+        "read": true,
+        "starred": false,
+        "important" : false
+    },
+    {
+        "author": "Giselle",
+        "msg": "cuicui",
+        "time": "5pm",
+        "preview": "nouveau msg",
+        "selected": false,
+        "read": false,
+        "starred": true,
+        "important" : false
+    },
+    {
+        "author": "Marg",
+        "msg": "ci",
+        "time": "5pm",
+        "preview": "nouve",
+        "selected": true,
+        "read": false,
+        "starred": false,
+        "important" : false
+    },
+    {
+        "author": "Erne",
+        "msg": "cuicui",
+        "time": "5pm",
+        "preview": "nouveau msg",
+        "selected": false,
+        "read": false,
+        "starred": true,
+        "important" : true
+    },
+    {
+        "author": "Luc",
+        "msg": "cuicui",
+        "time": "5pm",
+        "preview": "nouveau msg",
+        "selected": false,
+        "read": false,
+        "starred": false,
+        "important" : false
+    }
+]

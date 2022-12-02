@@ -2,18 +2,28 @@
   <div class="emailList">
     <!-- Settings Starts -->
     <div class="emailList__settings">
-      <div class="emailList__settingsLeft">
+      <div class="emailList__settingsLeft" v-if="isSelection">
         <input type="checkbox" v-model="selectAllCheckbox" />
         <span class="material-icons"> arrow_drop_down </span>
-        <span class="material-icons"> redo </span>
-        <span class="material-icons" v-on:click="deleteSelected"> delete </span>
+        <span class="material-icons" title="déplacer dans boite de reception" > move_to_inbox</span>
+        <span class="material-icons" title="marquer comme spam"> error_out</span>
+        <span class="material-icons" title="supprimer" v-on:click="deleteSelected"> delete </span>
+        <span class="material-icons" title="marquer comme non lu" > mail </span>
+        <span class="material-icons"> access_time</span>
+        <span class="material-icons"> playlist_add_check</span>
+        <span class="material-icons"> create_new_folder</span>
+        <span class="material-icons"> label_outline </span>
+        <span class="material-icons"> more_vert </span>
+      </div>
+      <div class="emailList__settingsLeft" v-else>
+        <input type="checkbox" v-model="selectAllCheckbox" />
+        <span class="material-icons"> arrow_drop_down </span>
+        <span class="material-icons"> refresh </span>
         <span class="material-icons"> more_vert </span>
       </div>
       <div class="emailList__settingsRight">
         <span class="material-icons"> chevron_left </span>
         <span class="material-icons"> chevron_right </span>
-        <span class="material-icons"> keyboard_hide </span>
-        <span class="material-icons"> settings </span>
       </div>
     </div>
     <!-- Settings Ends -->
@@ -74,10 +84,12 @@ export default {
   data() {
     return {
       selectAllCheckbox: false,
+      isSelection: true,
     };
   },
   methods: {
     elementSelected: function (data) {
+      this.isSelection = data[1];
       this.$emit("list-selection", data);
     },
     elementStarred: function (data) {
@@ -96,6 +108,7 @@ export default {
   watch: {
     selectAllCheckbox(val) {
       this.$emit("select-all", val);
+      this.isSelection = val;
     },
   },
 };
@@ -105,8 +118,6 @@ export default {
 <style scoped>
 .emailList {
   flex: 1;
-  overflow: scroll;
-  height: 90vh;
 }
 
 .emailList__settings {
@@ -125,7 +136,9 @@ export default {
 }
 
 .emailList__settings .material-icons {
-  margin: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 23px;
   cursor: pointer;
 }
 
@@ -149,6 +162,10 @@ export default {
 }
 
 .emailList__list {
+  overflow: scroll;
+  overflow-x: auto;
+  scroll-padding: 0;
+  height: 75vh;
 }
 
 .section__selected {

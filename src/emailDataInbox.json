@@ -1,23 +1,23 @@
 [
     {
         "author": "moi",
-        "msg": "blabla",
+        "msg": "blabla <br> Pour moi",
         "time": "10pm",
         "preview": "nouvel abo",
         "selected": false,
         "read": false,
         "starred": false,
-        "important" : false
+        "important": false
     },
     {
         "author": "lui",
-        "msg": "cuicui",
+        "msg": "Il y a maintenant deux mois, à la fin de l'été et malgré des températures peu clémentes,  l'événement Jusqu'au vallon, a rassemblé environ 150 participant-e-s dans le vallon de Charembeau. Ce furent deux jours de rencontres, conférences, projections cinéma, balades-cueillettes et animations en pleine nature autour de l'agroécologie.",
         "time": "5pm",
-        "preview": "nouveau msg",
+        "preview": " évènement dans le vallon",
         "selected": false,
         "read": true,
         "starred": false,
-        "important" : false
+        "important": false
     },
     {
         "author": "Giselle",
@@ -27,7 +27,7 @@
         "selected": false,
         "read": false,
         "starred": true,
-        "important" : false
+        "important": false
     },
     {
         "author": "Marg",
@@ -37,7 +37,7 @@
         "selected": true,
         "read": false,
         "starred": false,
-        "important" : false
+        "important": false
     },
     {
         "author": "Erne",
@@ -47,7 +47,7 @@
         "selected": false,
         "read": false,
         "starred": true,
-        "important" : true
+        "important": true
     },
     {
         "author": "Luc",
@@ -57,7 +57,7 @@
         "selected": false,
         "read": false,
         "starred": false,
-        "important" : false
+        "important": false
     },
     {
         "author": "moi",
@@ -67,7 +67,7 @@
         "selected": false,
         "read": false,
         "starred": false,
-        "important" : false
+        "important": false
     },
     {
         "author": "lui",
@@ -77,7 +77,7 @@
         "selected": false,
         "read": true,
         "starred": false,
-        "important" : false
+        "important": false
     },
     {
         "author": "Giselle",
@@ -87,7 +87,7 @@
         "selected": false,
         "read": false,
         "starred": true,
-        "important" : false
+        "important": false
     },
     {
         "author": "Marg",
@@ -97,7 +97,7 @@
         "selected": true,
         "read": false,
         "starred": false,
-        "important" : false
+        "important": false
     },
     {
         "author": "Erne",
@@ -107,7 +107,7 @@
         "selected": false,
         "read": false,
         "starred": true,
-        "important" : true
+        "important": true
     },
     {
         "author": "Luc",
@@ -117,6 +117,6 @@
         "selected": false,
         "read": false,
         "starred": false,
-        "important" : false
+        "important": false
     }
 ]

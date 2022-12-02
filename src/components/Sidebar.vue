@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <button class="sidebar__compose" v-on:click="newMail">
-      <span class="material-icons"> add </span>Compose
+      <span class="material-icons"> border_color </span> Nouveau message
     </button>
     <div class="sidebarOption " :class="{sidebarOption__active: currentMenu(0)}" v-on:click="inbox">
       <span class="material-icons"> inbox </span>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="sidebarOption" :class="{sidebarOption__active: currentMenu(3)}"  v-on:click="important">
-      <span class="material-icons"> label_important </span>
+      <span class="material-icons" style="width:20px"> label_important </span>
       <h3>Important</h3>
     </div>
 
@@ -41,7 +41,7 @@
     <div class="sidebar__footer">
       <div class="sidebar__footerIcons">
         <span class="material-icons"> person </span>
-        <span class="material-icons"> duo </span>
+        <span class="material-icons"> perm_camera_mic </span>
         <span class="material-icons"> phone </span>
       </div>
     </div>

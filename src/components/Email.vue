@@ -1,5 +1,5 @@
 <template>
-  <div class="emailRow">
+  <div class="emailRow" :class="backgroundLine()">
     <div class="emailRow__options">
       <input
         type="checkbox"
@@ -15,10 +15,10 @@
         star_border
       </span>
       <span class="material-icons" v-if="important" v-on:click="importantMail">
-        label_important
+        label
       </span>
       <span class="material-icons" v-else v-on:click="importantMail">
-        label_important_outline
+        label_outline
       </span>
     </div>
     <p class="emailRow__title" :class="{ unread: read }" v-on:click="clickMail">
@@ -68,6 +68,10 @@ export default {
     clickMail: function () {
       this.$emit("element-open", this.index);
     },
+    backgroundLine: function () {
+      if (!this.read) return "readLine";
+      else return "unreadLine";
+    },
   },
   watch: {
     selected(val, oldVal) {
@@ -89,7 +93,7 @@ export default {
 }
 .emailRow__options .material-icons,
 input {
-  margin: 5px;
+  margin: 2px;
 }
 
 .emailRow {
@@ -127,6 +131,7 @@ input {
   font-size: 13px;
   flex: 0.3;
   text-align: left;
+  margin: 10px;
 }
 
 .emailRow__time {
@@ -138,5 +143,12 @@ input {
 .emailRow__description {
   font-weight: 400;
   color: gray;
+}
+
+.readLine {
+  background-color: rgb(247, 247, 247);
+}
+.unreadLine {
+  background-color: rgb(255, 255, 255);
 }
 </style>

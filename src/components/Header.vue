@@ -3,7 +3,7 @@
     <div class="header__left">
       <span class="material-icons"> menu </span>
       <img
-        src="https://i.pinimg.com/originals/ae/47/fa/ae47fa9a8fd263aa364018517020552d.png"
+        src="~@/assets/gmail.png"
         alt=""
       />
     </div>
@@ -20,8 +20,9 @@
     </div>
 
     <div class="header__right">
+      <span class="material-icons"> help_outline </span>
+      <span class="material-icons"> settings </span>
       <span class="material-icons"> apps </span>
-      <span class="material-icons"> notifications </span>
       <span class="material-icons"> account_circle </span>
     </div>
   </div>
@@ -55,12 +56,20 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- @import "https://fonts.googleapis.com/icon?family=Material+Icons";-->
+<!-- @import '~material-design-icons/iconfont/material-icons.css';-->
 <style scoped>
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+@import '~material-design-icons/iconfont/material-icons.css';
+
 .header__left img {
   object-fit: contain;
   height: 80px;
   margin-left: 5px;
+}
+
+.header__right .material-icons{
+  margin:10px
 }
 
 .header {

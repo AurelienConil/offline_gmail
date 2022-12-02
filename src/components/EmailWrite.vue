@@ -5,8 +5,8 @@
       <div  id="firstLineEmpty"></div>
       <div id="firstLineRight">
         <span class="material-icons" v-on:click="reduce"> remove </span>
-        <span class="material-icons"> open_in_full </span>
-        <span class="material-icons" v-on:click="close"> close </span>
+        <span class="material-icons" v-if="isNotReduced"> fullscreen </span>
+        <span class="material-icons" v-if="isNotReduced" v-on:click="close"> close </span>
       </div>
     </div>
     <div v-if="isNotReduced" class="line">

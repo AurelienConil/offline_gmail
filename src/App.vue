@@ -152,6 +152,7 @@ export default {
       switch(this.currentcategoryemail ){
         case "inbox":
           this.currentlistofemail = this.listofemailinbox;
+          this.readingEmail =  false;
           break;
         case "starred":
           this.currentlistofemail = this.listofemailinbox.filter(

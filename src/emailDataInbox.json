@@ -1,102 +1,112 @@
 [
     {
-        "author": "moi",
+        "author": "julie@gmail.com",
         "msg": "blabla <br> Pour moi",
         "time": "10pm",
         "preview": "nouvel abo",
         "selected": false,
         "read": false,
         "starred": false,
+        "spam": false,
         "important": false
     },
     {
-        "author": "lui",
+        "author": "arthur@gmail.com",
         "msg": "Il y a maintenant deux mois, à la fin de l'été et malgré des températures peu clémentes,  l'événement Jusqu'au vallon, a rassemblé environ 150 participant-e-s dans le vallon de Charembeau. Ce furent deux jours de rencontres, conférences, projections cinéma, balades-cueillettes et animations en pleine nature autour de l'agroécologie.",
         "time": "5pm",
         "preview": " évènement dans le vallon",
         "selected": false,
         "read": true,
         "starred": false,
+        "spam": false,
         "important": false
     },
     {
-        "author": "Giselle",
+        "author": "giselle@gmail.com",
         "msg": "cuicui",
         "time": "5pm",
         "preview": "nouveau msg",
         "selected": false,
         "read": false,
         "starred": true,
+        "spam": false,
         "important": false
     },
     {
-        "author": "Marg",
+        "author": "margaux@gmail.com",
         "msg": "ci",
         "time": "5pm",
         "preview": "nouve",
-        "selected": true,
+        "selected": false,
         "read": false,
         "starred": false,
+        "spam": false,
         "important": false
     },
     {
-        "author": "Erne",
+        "author": "Ernestine@gmail.com",
         "msg": "cuicui",
         "time": "5pm",
         "preview": "nouveau msg",
         "selected": false,
         "read": false,
         "starred": true,
+        "spam": false,
         "important": true
     },
     {
-        "author": "Luc",
+        "author": "luc@gmail.com",
         "msg": "cuicui",
         "time": "5pm",
         "preview": "nouveau msg",
         "selected": false,
         "read": false,
         "starred": false,
+        "spam": false,
         "important": false
     },
     {
-        "author": "moi",
+        "author": "julien@gmail.com",
         "msg": "blabla",
         "time": "10pm",
         "preview": "nouvel abo",
         "selected": false,
         "read": false,
         "starred": false,
+        "spam": false,
         "important": false
     },
     {
-        "author": "lui",
+        "author": "eric@gmail.com",
         "msg": "cuicui",
         "time": "5pm",
         "preview": "nouveau msg",
         "selected": false,
         "read": true,
         "starred": false,
+        "spam": false,
         "important": false
     },
     {
-        "author": "Giselle",
+        "author": "marc@protonmail.com",
         "msg": "cuicui",
         "time": "5pm",
         "preview": "nouveau msg",
         "selected": false,
         "read": false,
         "starred": true,
+        "spam": false,
         "important": false
     },
     {
-        "author": "Marg",
+        "author": "elise@gmail.com",
         "msg": "ci",
         "time": "5pm",
         "preview": "nouve",
         "selected": true,
         "read": false,
         "starred": false,
+        "spam": false,
         "important": false
     },
     {
@@ -107,16 +117,18 @@
         "selected": false,
         "read": false,
         "starred": true,
+        "spam": false,
         "important": true
     },
     {
-        "author": "Luc",
+        "author": "Noemie@gmail.com",
         "msg": "cuicui",
         "time": "5pm",
         "preview": "nouveau msg",
         "selected": false,
         "read": false,
         "starred": false,
+        "spam": false,
         "important": false
     }
 ]

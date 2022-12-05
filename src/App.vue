@@ -2,14 +2,14 @@
   <div id="app">
     <EmailWrite
       v-if="writingEmail"
+      :author="writeMail.author"
+      :object="writeMail.object"
+      :content="writeMail.content"
       v-on:close-mail="closeMail"
       v-on:reduce-mail="reduceMail"
       v-on:send-mail="sendMail"
     />
-    <Header 
-    :msg="currentSearch"
-    v-on:search="search"
-    />
+    <Header :msg="currentSearch" v-on:search="search" />
     <div class="main__body">
       <Sidebar
         v-on:new-mail="newMail"
@@ -25,7 +25,11 @@
         :author="viewMail.author"
         :object="viewMail.object"
         :content="viewMail.content"
+        :index="viewMail.index"
+        :time="viewMail.time"
         v-on:leave-view="leaveView"
+        v-on:action="actionOnOne"
+        v-on:answer="answerMail"
       />
       <EmailList
         v-else
@@ -34,7 +38,7 @@
         v-on:element-starred="mailStarred"
         v-on:element-important="mailImportant"
         v-on:select-all="selectAll"
-        v-on:delete-selected="deleteSelected"
+        v-on:action="action"
         v-on:element-open="mailOpen"
       />
     </div>
@@ -62,15 +66,21 @@ export default {
   data: () => ({
     readingEmail: false,
     writingEmail: false,
+    writeMail: {
+      author: "",
+      object: "",
+      content:""
+    },
     viewMail: {
-      author: "baba",
+      author: "bab",
       object: "bibi",
-      content:
-        "Je cherche à me ",
+      content: "Je cherche à me ",
+      index: -1,
+      time : "",
     },
     currentlistofemail: [],
-    currentcategoryemail : "inbox",
-    currentSearch : "",
+    currentcategoryemail: "inbox",
+    currentSearch: "",
     listofemailinbox: dataEmailInbox,
     listofemailsent: dataEmailSent,
   }),
@@ -88,7 +98,9 @@ export default {
       this.viewMail.author = this.currentlistofemail[index].author;
       this.viewMail.object = this.currentlistofemail[index].preview;
       this.viewMail.content = this.currentlistofemail[index].msg;
-      this.currentlistofemail[index].read = true;
+      this.viewMail.index = index;
+      this.viewMail.time = this.currentlistofemail[index].time;
+      this.currentlistofemail[index].read = false; // read means unread
       this.readingEmail = true;
     },
     sendMail: function (data) {
@@ -100,12 +112,26 @@ export default {
       m.read = true;
       m.starred = false;
       m.important = false;
+      m.spam = false;
       this.listofemailsent.push(m);
+      this.writeMail.author = "";
+      this.writeMail.object = "";
+      this.writeMail.content = "";
+      this.writingEmail= false;
+      alert("mail envoyé");
+
     },
-    search: function(s){
+    answerMail: function (arg) {
+      let aut = arg[0];
+      let obj = arg[1];
+      this.writeMail.author = aut;
+      this.writeMail.object = "RE : "+obj;
+      this.readingEmail = false;
+      this.writingEmail = true;
+    },
+    search: function (s) {
       this.currentSearch = s;
       this.resetCurrentList();
-
     },
     selectAll: function (isSelected) {
       this.currentlistofemail.forEach((el) => {
@@ -115,10 +141,46 @@ export default {
     leaveView: function () {
       this.readingEmail = false;
     },
-    deleteSelected: function () {
-      this.currentlistofemail = this.currentlistofemail.filter(
-        (item) => !item.selected
-      );
+    actionOnOne: function (arg) {
+      this.selectAll(false);
+      let index = arg[1];
+      let act = arg[0];
+      this.currentlistofemail[index].selected = true;
+      this.action(act);
+      this.selectAll(false);
+      this.readingEmail = false;
+    },
+    action: function (actionName) {
+      switch (actionName) {
+        case "delete":
+          this.currentlistofemail = this.currentlistofemail.filter(
+            (item) => !item.selected
+          );
+          break;
+        case "inbox":
+          break;
+        case "spam":
+          this.currentlistofemail.forEach((element) => {
+            if (element.selected) {
+              element.spam = true;
+            }
+          });
+          break;
+        case "unread":
+          this.currentlistofemail.forEach((element) => {
+            if (element.selected) {
+              element.read = true;
+            }
+          });
+          break;
+        case "important":
+          this.currentlistofemail.forEach((element) => {
+            if (element.selected) {
+              element.important = true;
+            }
+          });
+          break;
+      }
     },
     newMail: function () {
       this.writingEmail = true;
@@ -130,50 +192,54 @@ export default {
       console.log("to do");
     },
     sidebarInbox: function () {
-      this.currentcategoryemail = "inbox"
+      this.currentcategoryemail = "inbox";
       this.resetCurrentList();
     },
     sidebarStarred: function () {
-      this.currentcategoryemail = "starred"
+      this.currentcategoryemail = "starred";
       this.resetCurrentList();
     },
     sidebarImportant: function () {
-      this.currentcategoryemail = "important"
+      this.currentcategoryemail = "important";
       this.resetCurrentList();
     },
     sidebarSent: function () {
-      this.currentcategoryemail = "sent"
+      this.currentcategoryemail = "sent";
       this.resetCurrentList();
     },
-    
+
     sidebarSnoozed: function () {},
     sidebarDraft: function () {},
-    resetCurrentList : function(){
-      switch(this.currentcategoryemail ){
+    resetCurrentList: function () {
+      switch (this.currentcategoryemail) {
         case "inbox":
           this.currentlistofemail = this.listofemailinbox;
-          this.readingEmail =  false;
+          this.readingEmail = false;
           break;
         case "starred":
           this.currentlistofemail = this.listofemailinbox.filter(
-          (item) => item.starred
+            (item) => item.starred
           );
           break;
         case "important":
           this.currentlistofemail = this.listofemailinbox.filter(
-          (item) => item.important
+            (item) => item.important
           );
           break;
         case "sent":
           this.currentlistofemail = this.listofemailsent;
           break;
       }
-      if(this.currentSearch.length>0){
-              this.currentlistofemail = this.currentlistofemail.filter(
-        (item) => (item.author.includes(this.currentSearch) || item.preview.includes(this.currentSearch) || item.msg.includes(this.currentSearch))
-      );
+      this.selectAll(false); // Unselect ALL after change of category
+      if (this.currentSearch.length > 0) {
+        this.currentlistofemail = this.currentlistofemail.filter(
+          (item) =>
+            item.author.includes(this.currentSearch) ||
+            item.preview.includes(this.currentSearch) ||
+            item.msg.includes(this.currentSearch)
+        );
       }
-    }
+    },
   },
   created: function () {
     this.currentlistofemail = this.listofemailinbox;

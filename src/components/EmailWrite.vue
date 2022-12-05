@@ -1,25 +1,29 @@
 <template>
-  <div :class="isReduceClass()" >
+  <div :class="isReduceClass()">
     <div class="firstLine line">
       <div id="firstLineLeft"><strong>Nouveau Message</strong></div>
-      <div  id="firstLineEmpty"></div>
+      <div id="firstLineEmpty"></div>
       <div id="firstLineRight">
         <span class="material-icons" v-on:click="reduce"> remove </span>
         <span class="material-icons" v-if="isNotReduced"> fullscreen </span>
-        <span class="material-icons" v-if="isNotReduced" v-on:click="close"> close </span>
+        <span class="material-icons" v-if="isNotReduced" v-on:click="close">
+          close
+        </span>
       </div>
     </div>
     <div v-if="isNotReduced" class="line">
-      <input type="text" v-model="aut" placeholder="Destinataire" />
+      <input type="text" v-model="author" placeholder="Destinataire" />
     </div>
     <div v-if="isNotReduced" class="line">
-      <input type="text" v-model="obj" placeholder="Objet" />
+      <input type="text" v-model="object" placeholder="Objet" />
     </div>
     <div>
-      <textarea v-if="isNotReduced" v-model="con"></textarea>
+      <textarea v-if="isNotReduced" v-model="content"></textarea>
     </div>
     <div v-if="isNotReduced" class="lastLine">
-      <button class="sendButton" v-on:click="send">Envoyer&nbsp;&nbsp;&nbsp;</button>
+      <button class="sendButton" v-on:click="send">
+        Envoyer&nbsp;&nbsp;&nbsp;
+      </button>
     </div>
   </div>
 </template>
@@ -34,10 +38,8 @@ export default {
   },
   data() {
     return {
-      aut: "",
-      obj: "",
-      con: "",
-      isNotReduced : true
+      cont: "",
+      isNotReduced: true,
     };
   },
   methods: {
@@ -45,30 +47,34 @@ export default {
       this.$emit("close-mail");
     },
     reduce: function () {
-      this.isNotReduced = ! this.isNotReduced;
-      console.log("switch reduce ")
+      this.isNotReduced = !this.isNotReduced;
+      console.log("switch reduce ");
       console.log(this.isReduceClass());
     },
     send: function () {
+      if(this.author.length == 0 ) return alert("destinataire vide");
+      if(this.object.length == 0 ) return alert("objet du mail vide");
+      if(this.content.length == 0 ) return alert("mail vide ...");
+
       let msgFinal =
         "author:" + this.aut + " obj:" + this.obj + " content:" + this.con;
       console.log("send message");
       console.log(msgFinal);
       let data = [this.aut, this.obj, this.con];
       this.$emit("send-mail", data);
+
     },
-    isReduceClass: function(){
-      if(this.isNotReduced) return "writeMain";
+    isReduceClass: function () {
+      if (this.isNotReduced) return "writeMain";
       else return "reduceMain";
-    }
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.material-icons:hover{
+.material-icons:hover {
   cursor: pointer;
 }
 .writeMain {
@@ -84,7 +90,6 @@ export default {
   background-color: rgb(255, 255, 255);
   border-radius: 4px;
 }
-
 
 .reduceMain {
   position: absolute;
@@ -187,6 +192,6 @@ export default {
 
 .sendButton:hover {
   box-shadow: 0px 2px 5px 2px #969696;
-  font-weight:bolder;
+  font-weight: bolder;
 }
 </style>

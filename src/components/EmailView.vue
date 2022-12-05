@@ -2,14 +2,40 @@
   <div class="emailMain">
     <div class="emailHeader">
       <span class="material-icons" v-on:click="leaveView">arrow_back </span>
-      <span class="material-icons"> move_to_inbox</span>
-      <span class="material-icons"> error_out</span>
-      <span class="material-icons"> delete </span>
-      <span class="material-icons"> mail </span>
+      <span
+        class="material-icons"
+        title="déplacer dans boite de reception"
+        v-on:click="action('inbox')"
+      >
+        move_to_inbox</span
+      >
+      <span
+        class="material-icons"
+        title="marquer comme spam"
+        v-on:click="action('spam')"
+      >
+        error_out</span
+      >
+      <span
+        class="material-icons"
+        title="supprimer"
+        v-on:click="action('delete')"
+      >
+        delete
+      </span>
+      <span
+        class="material-icons"
+        title="marquer comme non lu"
+        v-on:click="action('unread')"
+      >
+        mail
+      </span>
       <span class="material-icons"> access_time</span>
       <span class="material-icons"> playlist_add_check</span>
       <span class="material-icons"> create_new_folder</span>
-      <span class="material-icons"> label_outline </span>
+      <span class="material-icons" v-on:click="action('important')">
+        label_outline
+      </span>
       <span class="material-icons"> more_vert </span>
     </div>
     <div class="emailObject">
@@ -18,18 +44,17 @@
     <div class="emailAuthor">
       <div class="circlePeople">&nbsp;</div>
       <div class="emailAuthor_title">
-        <strong>' {{ author }}' </strong> nov. 2022 22:54 ( il y a 5 jours )
+        <strong> {{ getNameAuthor() }} </strong> {{ "&lt;" + author + "&gt;" }}
         <p>A moi</p>
       </div>
       <div class="emailAuthor_settings">
+        nov. 2022 {{ time }} ( il y a 5 jours )
         <span class="material-icons"> star</span>
-        <span class="material-icons"> arrow_back</span>
+        <span class="material-icons" v-on:click="answer"> arrow_back</span>
         <span class="material-icons"> more_vert </span>
       </div>
     </div>
-    <div class="emailView" v-html="content">
-      
-    </div>
+    <div class="emailView" v-html="content"></div>
   </div>
 </template>
 
@@ -40,6 +65,8 @@ export default {
     author: String,
     object: String,
     content: String,
+    time: String,
+    index: Number,
   },
   data() {
     return {
@@ -48,8 +75,21 @@ export default {
   },
   methods: {
     leaveView: function () {
-      console.log("leave the view");
       this.$emit("leave-view");
+    },
+    action: function (actionName) {
+      this.$emit("action", [actionName, this.index]);
+    },
+    answer: function () {
+      console.log("author: " + this.author);
+      this.$emit("answer", [this.author, this.object]);
+    },
+    getNameAuthor: function () {
+      let split = this.author.split("@");
+      let name = split[0].split("");
+      name[0] = name[0].toUpperCase(); // Let's upperCase the first letter
+      name = name.join("");
+      return name;
     },
     /*
     TODO : écrire un emit mailAction avec toutes les infos qu'on a besoin, "quelle action", "quel parametre". Comme ça, un unique emit à remonter juq'au
@@ -94,14 +134,15 @@ export default {
 }
 
 .emailAuthor_title {
-  width: 50%;
+  width: 30%;
   margin: 0px;
   float: left;
 }
 
 .emailAuthor_settings {
   text-align: right;
-  width: 20%;
+  vertical-align: text-top;
+  width: 60%;
   float: right;
   margin-right: 0px;
 }
@@ -128,5 +169,7 @@ export default {
   flex: 1;
   overflow: hidden;
   padding: 10px;
+  margin: 30px;
+  text-align: left;
 }
 </style>

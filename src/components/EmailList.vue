@@ -5,14 +5,40 @@
       <div class="emailList__settingsLeft" v-if="isSelection">
         <input type="checkbox" v-model="selectAllCheckbox" />
         <span class="material-icons"> arrow_drop_down </span>
-        <span class="material-icons" title="déplacer dans boite de reception" > move_to_inbox</span>
-        <span class="material-icons" title="marquer comme spam"> error_out</span>
-        <span class="material-icons" title="supprimer" v-on:click="deleteSelected"> delete </span>
-        <span class="material-icons" title="marquer comme non lu" > mail </span>
+        <span
+          class="material-icons"
+          title="déplacer dans boite de reception"
+          v-on:click="action('inbox')"
+        >
+          move_to_inbox</span
+        >
+        <span
+          class="material-icons"
+          title="marquer comme spam"
+          v-on:click="action('spam')"
+        >
+          error_out</span
+        >
+        <span
+          class="material-icons"
+          title="supprimer"
+          v-on:click="action('delete')"
+        >
+          delete
+        </span>
+        <span
+          class="material-icons"
+          title="marquer comme non lu"
+          v-on:click="action('unread')"
+        >
+          mail
+        </span>
         <span class="material-icons"> access_time</span>
         <span class="material-icons"> playlist_add_check</span>
         <span class="material-icons"> create_new_folder</span>
-        <span class="material-icons"> label_outline </span>
+        <span class="material-icons" v-on:click="action('important')">
+          label_outline
+        </span>
         <span class="material-icons"> more_vert </span>
       </div>
       <div class="emailList__settingsLeft" v-else>
@@ -103,6 +129,9 @@ export default {
     },
     elementOpen: function (arg) {
       this.$emit("element-open", arg);
+    },
+    action: function (actionName) {
+      this.$emit("action", actionName);
     },
   },
   watch: {

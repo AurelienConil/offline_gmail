@@ -118,6 +118,7 @@ export default {
       this.writeMail.object = "";
       this.writeMail.content = "";
       this.writingEmail= false;
+      console.log(data);
       alert("mail envoyé");
 
     },
@@ -206,6 +207,7 @@ export default {
     sidebarSent: function () {
       this.currentcategoryemail = "sent";
       this.resetCurrentList();
+      console.log("sent mode activated");
     },
 
     sidebarSnoozed: function () {},

@@ -52,17 +52,21 @@ export default {
       console.log(this.isReduceClass());
     },
     send: function () {
-      if(this.author.length == 0 ) return alert("destinataire vide");
-      if(this.object.length == 0 ) return alert("objet du mail vide");
-      if(this.content.length == 0 ) return alert("mail vide ...");
+      if (this.author.length == 0) return alert("destinataire vide");
+      if (this.object.length == 0) return alert("objet du mail vide");
+      if (this.content.length == 0) return alert("mail vide ...");
 
       let msgFinal =
-        "author:" + this.aut + " obj:" + this.obj + " content:" + this.con;
+        "author:" +
+        this.author +
+        " obj:" +
+        this.object +
+        " content:" +
+        this.content;
       console.log("send message");
       console.log(msgFinal);
-      let data = [this.aut, this.obj, this.con];
+      let data = [this.author, this.object, this.content];
       this.$emit("send-mail", data);
-
     },
     isReduceClass: function () {
       if (this.isNotReduced) return "writeMain";

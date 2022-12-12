@@ -22,7 +22,7 @@
       </span>
     </div>
     <p class="emailRow__title" :class="{ unread: read }" v-on:click="clickMail">
-      {{ getNameAuthor()  }}
+      {{ getNameAuthor() }}
     </p>
 
     <div class="emailRow__message" v-on:click="clickMail">
@@ -72,13 +72,11 @@ export default {
       if (!this.read) return "readLine";
       else return "unreadLine";
     },
-    getNameAuthor : function(){
-      let split = this.author.split('@');
-      let name = split[0].split("")
-      name[0] = name[0].toUpperCase(); // Let's upperCase the first letter 
-      name = name.join('');  
+    getNameAuthor: function () {
+      let split = this.author.split("@");
+      let name = split[0];
       return name;
-    }
+    },
   },
   watch: {
     selected(val, oldVal) {

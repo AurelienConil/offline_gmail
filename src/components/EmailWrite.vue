@@ -12,13 +12,13 @@
       </div>
     </div>
     <div v-if="isNotReduced" class="line">
-      <input type="text" v-model="author" placeholder="Destinataire" />
+      <input type="text" v-model="localAuthor" placeholder="Destinataire" />
     </div>
     <div v-if="isNotReduced" class="line">
-      <input type="text" v-model="object" placeholder="Objet" />
+      <input type="text" v-model="localObject" placeholder="Objet" />
     </div>
     <div>
-      <textarea v-if="isNotReduced" v-model="content"></textarea>
+      <textarea v-if="isNotReduced" v-model="localContent"></textarea>
     </div>
     <div v-if="isNotReduced" class="lastLine">
       <button class="sendButton" v-on:click="send">
@@ -38,7 +38,9 @@ export default {
   },
   data() {
     return {
-      cont: "",
+      localAuthor: this.author,
+      localObject: this.object,
+      localContent: this.content,
       isNotReduced: true,
     };
   },
@@ -52,20 +54,20 @@ export default {
       console.log(this.isReduceClass());
     },
     send: function () {
-      if (this.author.length == 0) return alert("destinataire vide");
-      if (this.object.length == 0) return alert("objet du mail vide");
-      if (this.content.length == 0) return alert("mail vide ...");
+      if (this.localAuthor.length == 0) return alert("destinataire vide");
+      if (this.localObject.length == 0) return alert("objet du mail vide");
+      if (this.localContent.length == 0) return alert("mail vide ...");
 
       let msgFinal =
         "author:" +
-        this.author +
+        this.localAuthor +
         " obj:" +
-        this.object +
+        this.localObject +
         " content:" +
-        this.content;
+        this.localContent;
       console.log("send message");
       console.log(msgFinal);
-      let data = [this.author, this.object, this.content];
+      let data = [this.localAuthor, this.localObject, this.localContent];
       this.$emit("send-mail", data);
     },
     isReduceClass: function () {

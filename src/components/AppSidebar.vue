@@ -7,21 +7,19 @@
       <span class="material-icons"> inbox </span>
       <h3>Inbox</h3>
     </div>
-
     <div class="sidebarOption"  :class="{sidebarOption__active: currentMenu(1)}" v-on:click="starred">
       <span class="material-icons"> star </span>
       <h3>Starred</h3>
     </div>
-
     <div class="sidebarOption" :class="{sidebarOption__active: currentMenu(2)}" v-on:click="snoozed" >
       <span class="material-icons"> access_time </span>
       <h3>Snoozed</h3>
     </div>
-
-    <div class="sidebarOption" :class="{sidebarOption__active: currentMenu(3)}"  v-on:click="important">
+    <div class="sidebarOption" :class="{sidebarOption__active: currentMenu(3)}" v-on:click="important">
       <span class="material-icons" style="width:20px"> label_important </span>
       <h3>Important</h3>
     </div>
+
 
     <div class="sidebarOption" :class="{sidebarOption__active: currentMenu(4)}" v-on:click="sent">
       <span class="material-icons"> near_me </span>
@@ -50,7 +48,7 @@
 
 <script>
 export default {
-  name: "Sidebar",
+  name: "AppSidebar",
   props: {
     msg: String,
   },

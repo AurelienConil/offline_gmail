@@ -33,32 +33,8 @@
         >
           mail
         </span>
-        <span class="material-icons"> access_time</span>
-        <span class="material-icons"> playlist_add_check</span>
-        <span class="material-icons"> create_new_folder</span>
-        <span class="material-icons" v-on:click="action('important')">
-          label_outline
-        </span>
-        <span class="material-icons"> more_vert </span>
-      </div>
-      <div class="emailList__settingsLeft" v-else>
-        <input type="checkbox" v-model="selectAllCheckbox" />
-        <span class="material-icons"> arrow_drop_down </span>
-        <span class="material-icons"> refresh </span>
-        <span class="material-icons"> more_vert </span>
-      </div>
-      <div class="emailList__settingsRight">
         <span class="material-icons"> chevron_left </span>
         <span class="material-icons"> chevron_right </span>
-      </div>
-    </div>
-    <!-- Settings Ends -->
-
-    <!-- Section Starts -->
-    <div class="emailList__sections">
-      <div class="section section__selected">
-        <span class="material-icons"> inbox </span>
-        <h4>Primary</h4>
       </div>
 
       <div class="section">
@@ -76,7 +52,7 @@
     <!-- Email List rows starts -->
     <div class="emailList__list">
       <!-- Email Row Starts -->
-      <Email
+      <AppEmail
         v-for="(item, i) in listofmail"
         :author="item.author"
         :key="i"
@@ -91,18 +67,17 @@
         v-on:element-starred="elementStarred"
         v-on:element-important="elementImportant"
         v-on:element-open="elementOpen"
-      >
-      </Email>
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Email from "./Email.vue";
+import AppEmail from "./AppEmail.vue";
 export default {
-  name: "Sidebar",
+  name: "EmailList",
   components: {
-    Email,
+    AppEmail,
   },
   props: {
     listofmail: Array,

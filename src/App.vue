@@ -9,9 +9,9 @@
       v-on:reduce-mail="reduceMail"
       v-on:send-mail="sendMail"
     />
-    <Header :msg="currentSearch" v-on:search="search" />
+  <AppHeader :msg="currentSearch" v-on:search="search" />
     <div class="main__body">
-      <Sidebar
+  <AppSidebar
         v-on:new-mail="newMail"
         v-on:sidebar-starred="sidebarStarred"
         v-on:sidebar-sent="sidebarSent"
@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Sidebar from "./components/Sidebar.vue";
+import AppHeader from "./components/AppHeader.vue";
+import AppSidebar from "./components/AppSidebar.vue";
 import EmailList from "./components/EmailList.vue";
 import EmailView from "./components/EmailView.vue";
 import EmailWrite from "./components/EmailWrite.vue";
@@ -57,8 +57,8 @@ import dataEmailSent from "./emailDataSent.json";
 export default {
   name: "App",
   components: {
-    Header,
-    Sidebar,
+    AppHeader,
+    AppSidebar,
     EmailList,
     EmailView,
     EmailWrite,

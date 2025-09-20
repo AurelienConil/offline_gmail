@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: "Email",
+  name: "AppEmail",
   props: {
     index: Number,
     author: String,

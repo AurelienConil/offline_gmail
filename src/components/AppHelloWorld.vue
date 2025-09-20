@@ -89,6 +89,7 @@
 <script>
 export default {
   name: "HelloWorld",
+     name: "AppHelloWorld",
   props: {
     msg: String,
   },

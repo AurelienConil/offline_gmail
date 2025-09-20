@@ -23,6 +23,9 @@
       <EmailView
         v-if="readingEmail"
         :author="viewMail.author"
+        :to="viewMail.to"
+        :cc="viewMail.cc"
+        :bcc="viewMail.bcc"
         :object="viewMail.object"
         :content="viewMail.content"
         :index="viewMail.index"
@@ -95,35 +98,61 @@ export default {
       this.currentlistofemail[star[0]].starred = !star[1]; // star if it is not starred
     },
     mailOpen: function (index) {
-      this.viewMail.author = this.currentlistofemail[index].author;
-      this.viewMail.object = this.currentlistofemail[index].preview;
-      this.viewMail.content = this.currentlistofemail[index].msg;
+      const mail = this.currentlistofemail[index];
+      this.viewMail.author = mail.author;
+      this.viewMail.to = mail.to || [];
+      this.viewMail.cc = mail.cc || [];
+      this.viewMail.bcc = mail.bcc || [];
+      this.viewMail.object = mail.preview;
+      this.viewMail.content = mail.msg;
       this.viewMail.index = index;
-      this.viewMail.time = this.currentlistofemail[index].time;
+      this.viewMail.time = mail.time;
       this.currentlistofemail[index].read = false; // read means unread
       this.readingEmail = true;
     },
-    sendMail: function (data) {
-      let m = {};
-      m.author = data[0];
-      m.msg = data[2];
-      m.time = "10pm";
-      m.preview = data[1];
-      m.read = true;
-      m.starred = false;
-      m.important = false;
-      m.spam = false;
+    sendMail: function (mail) {
+      let m = {
+        author: mail.author,
+        to: mail.to,
+        cc: mail.cc,
+        bcc: mail.bcc,
+        msg: mail.content,
+        time: "10pm",
+        preview: mail.object,
+        read: true,
+        starred: false,
+        important: false,
+        spam: false
+      };
       this.listofemailsent.push(m);
       this.writeMail.author = "";
       this.writeMail.object = "";
       this.writeMail.content = "";
       this.writingEmail= false;
-      console.log(data);
-      alert("mail envoyé");
-
+      console.log(mail);
+      // Affiche une notification personnalisée façon Gmail
+      const notif = document.createElement('div');
+      notif.textContent = 'GMAIL vous notifie : mail envoyé';
+      notif.style.position = 'fixed';
+      notif.style.top = '30px';
+      notif.style.right = '70px';
+      notif.style.background = '#323232';
+      notif.style.color = '#fff';
+      notif.style.padding = '16px 32px';
+      notif.style.borderRadius = '8px';
+      notif.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+      notif.style.fontSize = '1.1rem';
+      notif.style.zIndex = '9999';
+      notif.style.opacity = '0.95';
+      notif.style.transition = 'opacity 0.3s';
+      document.body.appendChild(notif);
+      setTimeout(() => {
+        notif.style.opacity = '0';
+        setTimeout(() => document.body.removeChild(notif), 300);
+      }, 2000);
     },
     answerMail: function (arg) {
-      let aut = arg[0];
+      let aut = this.viewMail.author; // toujours l'expéditeur
       let obj = arg[1];
       this.writeMail.author = aut;
       this.writeMail.object = "RE : "+obj;
@@ -194,18 +223,22 @@ export default {
     },
     sidebarInbox: function () {
       this.currentcategoryemail = "inbox";
+      this.readingEmail = false;
       this.resetCurrentList();
     },
     sidebarStarred: function () {
       this.currentcategoryemail = "starred";
+      this.readingEmail = false;
       this.resetCurrentList();
     },
     sidebarImportant: function () {
       this.currentcategoryemail = "important";
+      this.readingEmail = false;
       this.resetCurrentList();
     },
     sidebarSent: function () {
       this.currentcategoryemail = "sent";
+      this.readingEmail = false;
       this.resetCurrentList();
       console.log("sent mode activated");
     },

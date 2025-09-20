@@ -55,6 +55,7 @@
       <AppEmail
         v-for="(item, i) in listofmail"
         :author="item.author"
+        :to="item.to"
         :key="i"
         :index="i"
         :time="item.time"

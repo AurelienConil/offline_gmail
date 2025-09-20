@@ -47,14 +47,23 @@
         <strong> {{ getNameAuthor() }} </strong> {{ "&lt;" + author + "&gt;" }}
         <p>A moi</p>
       </div>
+        <div v-if="to && to.length">
+          <span><b>À :</b> {{ to.join(', ') }}</span>
+        </div>
+        <div v-if="cc && cc.length">
+          <span><b>CC :</b> {{ cc.join(', ') }}</span>
+        </div>
+        <div v-if="bcc && bcc.length">
+          <span><b>CCI :</b> {{ bcc.join(', ') }}</span>
+        </div>
       <div class="emailAuthor_settings">
         nov. 2022 {{ time }} ( il y a 5 jours )
-        <span class="material-icons"> star</span>
+        <span class="material-icons" :style="{color: isStarred ? '#FFD700' : ''}" v-on:click="toggleStar">{{ isStarred ? 'star' : 'star_border' }}</span>
         <span class="material-icons" v-on:click="answer"> arrow_back</span>
-        <span class="material-icons"> more_vert </span>
+        <span class="material-icons" v-on:click="showMenu"> more_vert </span>
       </div>
     </div>
-    <div class="emailView" v-html="content"></div>
+    <div class="emailView">{{ content }}</div>
   </div>
 </template>
 
@@ -63,6 +72,9 @@ export default {
   name: "EmailView",
   props: {
     author: String,
+    to: Array,
+    cc: Array,
+    bcc: Array,
     object: String,
     content: String,
     time: String,
@@ -73,6 +85,14 @@ export default {
       selectAllCheckbox: false,
     };
   },
+  computed: {
+    isStarred() {
+      if (typeof this.index === 'number' && this.$parent && this.$parent.currentlistofemail) {
+        return this.$parent.currentlistofemail[this.index]?.starred;
+      }
+      return false;
+    }
+  },
   methods: {
     leaveView: function () {
       this.$emit("leave-view");
@@ -81,20 +101,41 @@ export default {
       this.$emit("action", [actionName, this.index]);
     },
     answer: function () {
-      console.log("author: " + this.author);
-      this.$emit("answer", [this.author, this.object]);
+      // On répond au premier destinataire du champ "to" si présent, sinon à author
+      let replyTo = '';
+      if (Array.isArray(this.to) && this.to.length > 0) {
+        replyTo = this.to[0];
+      } else if (this.author) {
+        replyTo = this.author;
+      }
+      this.$emit("answer", [replyTo, this.object]);
     },
     getNameAuthor: function () {
-      let split = this.author.split("@");
-      let name = split[0].split("");
-      name[0] = name[0].toUpperCase(); // Let's upperCase the first letter
-      name = name.join("");
-      return name;
+      // Si plusieurs auteurs (tableau)
+      const formatName = (email) => {
+        if (!email || typeof email !== 'string') return '';
+        let split = email.split("@");
+        if (!split[0] || split[0].length === 0) return email;
+        let name = split[0].split("");
+        if (name.length > 0) name[0] = name[0].toUpperCase();
+        name = name.join("");
+        return name;
+      };
+      if (Array.isArray(this.author)) {
+        return this.author.map(formatName).join(', ');
+      } else {
+        return formatName(this.author);
+      }
     },
-    /*
-    TODO : écrire un emit mailAction avec toutes les infos qu'on a besoin, "quelle action", "quel parametre". Comme ça, un unique emit à remonter juq'au
-    main, pour toutes actions possibles sur les mails.
-    */
+    toggleStar: function () {
+      if (typeof this.index === 'number' && this.$parent && this.$parent.currentlistofemail) {
+        let mail = this.$parent.currentlistofemail[this.index];
+        if (mail) mail.starred = !mail.starred;
+      }
+    },
+    showMenu: function () {
+      alert('Fonctionnalité à venir : menu actions mail.');
+    },
   },
   watch: {},
 };

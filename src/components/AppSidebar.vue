@@ -3,37 +3,37 @@
     <button class="sidebar__compose" v-on:click="newMail">
       <span class="material-icons"> border_color </span> Nouveau message
     </button>
+
     <div class="sidebarOption " :class="{sidebarOption__active: currentMenu(0)}" v-on:click="inbox">
       <span class="material-icons"> inbox </span>
-      <h3>Inbox</h3>
+      <h3>Boîte de réception</h3>
     </div>
     <div class="sidebarOption"  :class="{sidebarOption__active: currentMenu(1)}" v-on:click="starred">
       <span class="material-icons"> star </span>
-      <h3>Starred</h3>
+      <h3>Favoris</h3>
     </div>
     <div class="sidebarOption" :class="{sidebarOption__active: currentMenu(2)}" v-on:click="snoozed" >
       <span class="material-icons"> access_time </span>
-      <h3>Snoozed</h3>
+      <h3>En attente</h3>
     </div>
     <div class="sidebarOption" :class="{sidebarOption__active: currentMenu(3)}" v-on:click="important">
       <span class="material-icons" style="width:20px"> label_important </span>
       <h3>Important</h3>
     </div>
 
-
     <div class="sidebarOption" :class="{sidebarOption__active: currentMenu(4)}" v-on:click="sent">
       <span class="material-icons"> near_me </span>
-      <h3>Sent</h3>
+      <h3>Messages envoyés</h3>
     </div>
 
     <div class="sidebarOption" :class="{sidebarOption__active: currentMenu(5)}" v-on:click="draft">
       <span class="material-icons"> note </span>
-      <h3>Drafts</h3>
+      <h3>Brouillons</h3>
     </div>
 
     <div class="sidebarOption">
       <span class="material-icons"> expand_more </span>
-      <h3>More</h3>
+      <h3>Plus</h3>
     </div>
 
     <div class="sidebar__footer">

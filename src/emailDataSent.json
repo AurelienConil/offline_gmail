@@ -1,12 +1,54 @@
 [
     {
-        "author": "monami@gmail.com",
-        "msg": "blabla",
-        "time": "10pm",
-        "preview": "super nouvelle à annoncer",
+    "author": "rh@entreprise.com",
+    "to": ["candidat@gmail.com"],
+    "cc": [],
+    "bcc": [],
+        "msg": "Bonjour,\n\nVeuillez trouver ci-joint mon CV et ma lettre de motivation pour le poste de développeur web. Je reste à votre disposition pour toute information complémentaire.\n\nCordialement,\nAurélien Conil",
+        "time": "08:55",
+        "preview": "Candidature développeur web",
+        "selected": false,
+        "read": true,
+        "starred": false,
+        "important": true
+    },
+    {
+    "author": "julie.dupont@gmail.com",
+    "to": ["julie.dupont@gmail.com"],
+    "cc": [],
+    "bcc": [],
+        "msg": "Coucou Julie,\n\nJe confirme pour ce soir, à tout à l’heure !",
+        "time": "12:01",
+        "preview": "Je confirme pour ce soir",
         "selected": false,
         "read": false,
         "starred": false,
-        "important" : false
+        "important": false
+    },
+    {
+    "author": "support@apple.com",
+    "to": ["support@apple.com"],
+    "cc": [],
+    "bcc": [],
+        "msg": "Bonjour,\n\nJe rencontre un problème avec mon identifiant Apple. Pouvez-vous m’aider à le résoudre ? Merci d’avance.",
+        "time": "14:22",
+        "preview": "Problème identifiant Apple",
+        "selected": false,
+        "read": false,
+        "starred": false,
+        "important": false
+    },
+    {
+    "author": "marc.leroy@protonmail.com",
+    "to": ["marc.leroy@protonmail.com"],
+    "cc": [],
+    "bcc": [],
+        "msg": "Salut Marc,\n\nVoici le rapport demandé en pièce jointe. N’hésite pas si tu as des questions.",
+        "time": "18:03",
+        "preview": "Voici le rapport demandé",
+        "selected": false,
+        "read": false,
+        "starred": true,
+        "important": false
     }
 ]

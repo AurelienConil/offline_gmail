@@ -23,6 +23,7 @@
     </div>
     <p class="emailRow__title" :class="{ unread: read }" v-on:click="clickMail">
       {{ getNameAuthor() }}
+      <span v-if="to && to.length" style="font-size:10px; color:gray;"> → {{ to.join(', ') }}</span>
     </p>
 
     <div class="emailRow__message" v-on:click="clickMail">
@@ -42,7 +43,8 @@ export default {
   name: "AppEmail",
   props: {
     index: Number,
-    author: String,
+  author: String,
+  to: Array,
     time: String,
     preview: String,
     read: Boolean,

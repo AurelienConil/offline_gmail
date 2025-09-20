@@ -12,7 +12,13 @@
       </div>
     </div>
     <div v-if="isNotReduced" class="line">
-      <input type="text" v-model="localAuthor" placeholder="Destinataire" />
+      <input type="text" v-model="toInput" placeholder="À (séparer par des virgules)" />
+    </div>
+    <div v-if="isNotReduced" class="line">
+      <input type="text" v-model="ccInput" placeholder="CC (séparer par des virgules)" />
+    </div>
+    <div v-if="isNotReduced" class="line">
+      <input type="text" v-model="bccInput" placeholder="CCI (séparer par des virgules)" />
     </div>
     <div v-if="isNotReduced" class="line">
       <input type="text" v-model="localObject" placeholder="Objet" />
@@ -39,10 +45,20 @@ export default {
   data() {
     return {
       localAuthor: this.author,
+      toInput: this.author ? this.author : '',
+      ccInput: '',
+      bccInput: '',
       localObject: this.object,
       localContent: this.content,
       isNotReduced: true,
     };
+  },
+  watch: {
+    author(newVal) {
+      if (newVal) {
+        this.toInput = newVal;
+      }
+    }
   },
   methods: {
     close: function () {
@@ -54,21 +70,26 @@ export default {
       console.log(this.isReduceClass());
     },
     send: function () {
-      if (this.localAuthor.length == 0) return alert("destinataire vide");
-      if (this.localObject.length == 0) return alert("objet du mail vide");
-      if (this.localContent.length == 0) return alert("mail vide ...");
+      // Validation
+      if (!this.toInput || this.toInput.trim().length === 0) return alert("destinataire vide");
+      if (!this.localObject || this.localObject.trim().length === 0) return alert("objet du mail vide");
+      if (!this.localContent || this.localContent.trim().length === 0) return alert("mail vide ...");
 
-      let msgFinal =
-        "author:" +
-        this.localAuthor +
-        " obj:" +
-        this.localObject +
-        " content:" +
-        this.localContent;
-      console.log("send message");
-      console.log(msgFinal);
-      let data = [this.localAuthor, this.localObject, this.localContent];
-      this.$emit("send-mail", data);
+      // Split les champs par virgule et nettoie
+      const to = this.toInput.split(',').map(e => e.trim()).filter(e => e);
+      const cc = this.ccInput.split(',').map(e => e.trim()).filter(e => e);
+      const bcc = this.bccInput.split(',').map(e => e.trim()).filter(e => e);
+
+      let msgFinal = {
+        author: this.localAuthor,
+        to,
+        cc,
+        bcc,
+        object: this.localObject,
+        content: this.localContent
+      };
+      console.log("send message", msgFinal);
+      this.$emit("send-mail", msgFinal);
     },
     isReduceClass: function () {
       if (this.isNotReduced) return "writeMain";
@@ -86,7 +107,7 @@ export default {
 .writeMain {
   position: absolute;
   width: 500px;
-  height: 500px;
+  height: 570px;
   margin: 50px auto auto 0px;
   right: 5px;
   bottom: 0px;

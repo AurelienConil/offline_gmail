@@ -1,7 +1,7 @@
 <template>
   <div class="emailMain">
     <div class="emailHeader">
-      <span class="material-icons" v-on:click="leaveView">arrow_back </span>
+      <span class="material-icons" v-on:click="leaveView" style="cursor: pointer;">arrow_back </span>
       <span
         class="material-icons"
         title="déplacer dans boite de reception"
@@ -45,7 +45,6 @@
       <div class="circlePeople">&nbsp;</div>
       <div class="emailAuthor_title">
         <strong> {{ getNameAuthor() }} </strong> {{ "&lt;" + author + "&gt;" }}
-        <p>A moi</p>
       </div>
         <div v-if="to && to.length">
           <span><b>À :</b> {{ to.join(', ') }}</span>
@@ -58,9 +57,9 @@
         </div>
       <div class="emailAuthor_settings">
         nov. 2022 {{ time }} ( il y a 5 jours )
-        <span class="material-icons" :style="{color: isStarred ? '#FFD700' : ''}" v-on:click="toggleStar">{{ isStarred ? 'star' : 'star_border' }}</span>
-        <span class="material-icons" v-on:click="answer"> arrow_back</span>
-        <span class="material-icons" v-on:click="showMenu"> more_vert </span>
+        <span class="material-icons" :style="{color: isStarred ? '#FFD700' : ''}" v-on:click="toggleStar" style="cursor: pointer;">{{ isStarred ? 'star' : 'star_border' }}</span>
+        <span class="material-icons" v-on:click="answer" style="cursor: pointer;"> arrow_back</span>
+        <span class="material-icons" v-on:click="showMenu" style="cursor: pointer;"> more_vert </span>
       </div>
     </div>
     <div class="emailView">{{ content }}</div>
@@ -147,10 +146,16 @@ export default {
   flex: 1;
   margin-top: 10px;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .emailHeader {
   text-align: left;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e8eaed;
+  margin-bottom: 20px;
 }
 
 .emailHeader .material-icons {
@@ -160,11 +165,11 @@ export default {
 }
 .emailObject {
   flex: 1;
-  padding: 10px;
+  padding: 15px 10px;
   text-align: left;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 2em;
+  border-bottom: 1px solid #e8eaed;
 }
 
 .emailAuthor {
@@ -172,6 +177,11 @@ export default {
   vertical-align: middle;
   display: table;
   width: 100%;
+  padding: 15px 10px;
+  background-color: #fafafa;
+  border: 1px solid #e8eaed;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 .emailAuthor_title {
@@ -209,8 +219,13 @@ export default {
 .emailView {
   flex: 1;
   overflow: hidden;
-  padding: 10px;
-  margin: 30px;
+  padding: 20px;
+  margin: 0;
   text-align: left;
+  background-color: #fff;
+  border: 1px solid #e8eaed;
+  border-radius: 8px;
+  line-height: 1.6;
+  min-height: 200px;
 }
 </style>
